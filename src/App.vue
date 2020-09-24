@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <Todos v-bind:todos="todos" />
+    <Todos 
+      v-bind:todos="todos"
+      v-on:del-todo="deleteTodo"
+    />
   </div>
 </template>
 
@@ -19,6 +22,11 @@ export default {
         { title: 'Learn TypeScript', id: 2, completed: true },
         { title: 'Develop Test Task', id: 3, completed: false },
       ]
+    }
+  },
+  methods: {
+    deleteTodo(id) {
+      this.todos = this.todos.filter(todo => todo.id !== id);
     }
   }
 }

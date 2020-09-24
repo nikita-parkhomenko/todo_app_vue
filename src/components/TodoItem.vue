@@ -1,6 +1,15 @@
 <template>
   <div class="todo-item" v-bind:class="{'is-complete':todo.completed}">
-    <h3>{{todo.title}}</h3>
+    <h3>
+      <input type="checkbox" v-on:change="toggleComplete">
+      {{todo.title}}
+      <button 
+        @click="$emit('del-todo', todo.id)"
+        class="del"
+      >
+        x
+      </button>
+    </h3>
   </div>
 </template>
 
@@ -8,6 +17,11 @@
 export default {
   name: 'TodoItem',
   props: ["todo"],
+  methods: {
+    toggleComplete() {
+      this.todo.completed = !this.todo.completed;
+    }
+  }
 }
 </script>
 
@@ -26,6 +40,7 @@ export default {
     border: none;
     padding: 5px 9px;
     border-radius: 50%;
+    outline: none;
     cursor: pointer;
     float: right;
   }
